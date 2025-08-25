@@ -24,6 +24,10 @@ class ServiceProvider extends IlluminateServiceProvider
      */
     public function register()
     {
+        if (method_exists(IlluminateServiceProvider::class, 'addProviderToBootstrapFile')) {
+            IlluminateServiceProvider::addProviderToBootstrapFile(self::class);
+        }
+
         $this->app->resolving('validator', function ($factory, $app) {
 
             $colorValidator = new ColorValidator();
